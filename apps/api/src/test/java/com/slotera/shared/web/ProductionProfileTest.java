@@ -11,9 +11,12 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest(properties = {
-        "DATABASE_URL=jdbc:postgresql://localhost:55432/slotera",
+        "DATABASE_URL=${TEST_DATABASE_URL:jdbc:postgresql://localhost:55432/slotera}",
         "DATABASE_USER=slotera",
-        "DATABASE_PASSWORD=slotera_local"
+        "DATABASE_PASSWORD=slotera_local",
+        "OIDC_ISSUER=https://id.example.test/realms/slotera",
+        "OIDC_AUDIENCE=slotera-api",
+        "WEB_ORIGIN=https://web.example.test"
 })
 @AutoConfigureMockMvc
 @ActiveProfiles("prod")

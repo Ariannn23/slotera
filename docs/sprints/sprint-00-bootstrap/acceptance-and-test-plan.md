@@ -1,0 +1,24 @@
+# Aceptación y pruebas — Sprint 00
+
+Entorno y commit candidato: pendientes. Estados iniciales PENDING.
+
+| ID | Historia | Dado | Cuando | Entonces | Estado |
+|---|---|---|---|---|---|
+| CA-01 | HU-01 | Una copia limpia y requisitos documentados | Se inicia PostgreSQL y la API | Flyway aplica la migración y health responde correctamente. | PENDING |
+| CA-02 | HU-01 | Una base ya migrada | Se inicia de nuevo la API | Flyway valida el historial y el arranque concluye. | PENDING |
+| CA-03 | HU-01 | Una copia limpia | Se instalan dependencias y arranca web | La aplicación inicial carga y sus pasos están documentados. | PENDING |
+| CA-04 | HU-02 | El proyecto configurado | Se ejecutan verificaciones API y web | Compilación, pruebas, lint, typecheck y build aplicables terminan correctamente. | PENDING |
+| CA-05 | HU-02 | Un PR con el commit candidato | Se ejecuta GitHub Actions | Las verificaciones configuradas terminan en verde y quedan registradas. | PENDING |
+| CA-06 | HU-03 | Instrucciones de arranque | El desarrollador realiza el ejercicio | Explica servicio, puerto y volumen y verifica health con acompañamiento. | PENDING |
+
+## Casos adicionales
+
+Verificar configuración Compose, conexión fallida con PostgreSQL y mensaje de diagnóstico, aplicación de migración sobre PostgreSQL real, reinicio, arranque de web, ausencia de secretos en archivos versionados y README de ambos módulos. Registrar pasos manuales, salidas, entorno y evidencia. Los controles de reservas, aislamiento y concurrencia se marcarán NOT_APPLICABLE con motivo en este sprint.
+
+## Ejecución
+
+| Fecha | Comando y directorio | SHA y entorno | Resultado | Evidencia |
+|---|---|---|---|---|
+| Pendiente | Pendiente | Pendiente | PENDING | — |
+
+Defectos, correcciones y revalidaciones: pendientes.

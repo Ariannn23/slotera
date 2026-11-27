@@ -43,5 +43,7 @@ Defectos, correcciones y revalidaciones: pendientes.
 - El 27-11-2026 se clonó el commit `a0853cc` en un directorio temporal. En la web, `pnpm install --frozen-lockfile`, lint, typecheck, test y build terminaron correctamente. Vitest ejecutó una prueba.
 - En una base PostgreSQL 17 vacía, creada separadamente en el contenedor de desarrollo, `mvnw.cmd --batch-mode clean verify` terminó correctamente y Flyway aplicó V1. Un segundo arranque de la API validó la migración y `GET /actuator/health` respondió `UP` en el puerto de prueba 18082.
 - Playwright revisó la pantalla inicial generada por Vite en anchos 375, 768 y 1280 px. La página se adaptó sin desbordamiento horizontal y la consola no mostró errores ni advertencias. La pantalla sigue siendo la plantilla de Vite.
-- El ejercicio del desarrollador permanece PENDING. La CI del commit candidato final debe comprobarse después de incorporar esta evidencia.
+- La CI del commit candidato final debe comprobarse después de incorporar esta evidencia.
 - Se inició Compose desde la copia con un proyecto y volumen nuevos. Para evitar el puerto ya ocupado se cambió en una copia temporal de Compose el puerto anfitrión a 55433 y se ajustó `DATABASE_URL`. Flyway aplicó V1 y health respondió `UP` en el puerto de prueba 18083.
+- El desarrollador compartió una respuesta health con estado `UP` y el fragmento de Compose del servicio PostgreSQL. Se revisaron conjuntamente el mapeo de puertos y la función del volumen, aclarando su consulta sobre persistencia.
+- Se propone aceptar la revisión acompañada como cumplimiento de CA-06. El criterio aprobado pide una explicación del desarrollador, que no se ha registrado. La propuesta requiere aprobación humana.

@@ -1,16 +1,16 @@
 # Acta de aprobación — Sprint 00
 
-Estado: PENDING · Rama: pendiente · SHA candidato: pendiente · PR: pendiente
+Estado: VERIFYING · Rama: sprint/00-bootstrap · SHA verificado: 6d96dc6 · PR: #1
 
 ## Resultado y evidencias
 
-Pendientes de implementación y verificación. Consultar la matriz de aceptación para registrar resultados reales y riesgos.
+API Spring Boot y web React iniciales, PostgreSQL con Compose, Flyway, health y CI implementados. La matriz registra verificaciones locales y de copia limpia. La CI del SHA 6d96dc6 pasó para API y web. El desarrollador compartió health y Compose y revisamos el puerto y la persistencia del volumen. La web sigue mostrando la plantilla provisional de Vite.
 
 ## Definition of Done
 
-- [ ] Criterios aplicables, pruebas y comprobaciones manuales aprobados.
-- [ ] Migraciones y documentación verificadas según alcance.
-- [ ] Diff revisado y CI verde para el commit candidato.
+- [ ] Criterios aplicables, pruebas y comprobaciones manuales aprobados. CA-06 queda pendiente de aceptar la revisión acompañada.
+- [x] Migraciones y documentación verificadas según alcance.
+- [ ] Diff revisado y CI verde para el commit candidato final.
 - [ ] Riesgos residuales y aprendizaje registrados.
 
 ## Aprobación humana y cierre

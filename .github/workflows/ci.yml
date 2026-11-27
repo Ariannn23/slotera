@@ -49,3 +49,67 @@ jobs:
         working-directory: apps/web
       - run: pnpm run build
         working-directory: apps/web
+  identity-e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      SLOTERA_DB_PORT: '55435'
+      KEYCLOAK_PORT: '18088'
+      KEYCLOAK_PUBLIC_URL: http://localhost:18088
+      MAILPIT_UI_PORT: '18025'
+      DATABASE_URL: jdbc:postgresql://localhost:55435/slotera
+      DATABASE_USER: slotera
+      DATABASE_PASSWORD: slotera_local
+      VITE_API_URL: http://localhost:18089
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: pnpm
+          cache-dependency-path: apps/web/pnpm-lock.yaml
+      - name: Preparar credenciales temporales
+        run: |
+          db_password=$(openssl rand -hex 24)
+          admin_password=$(openssl rand -hex 24)
+          echo "::add-mask::$db_password"
+          echo "::add-mask::$admin_password"
+          echo "KEYCLOAK_DB_PASSWORD=$db_password" >> "$GITHUB_ENV"
+          echo "KEYCLOAK_ADMIN_USERNAME=ci-admin" >> "$GITHUB_ENV"
+          echo "KEYCLOAK_ADMIN_PASSWORD=$admin_password" >> "$GITHUB_ENV"
+      - name: Iniciar PostgreSQL, Keycloak y Mailpit
+        run: |
+          docker compose config --quiet
+          docker compose up -d
+          docker compose exec -T keycloak java -version 2>&1 | grep '21.0.13.1'
+          for attempt in $(seq 1 90); do
+            if curl -fsS http://localhost:18088/realms/slotera/.well-known/openid-configuration > /dev/null; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+      - name: Compilar API
+        working-directory: apps/api
+        run: ./mvnw --batch-mode -DskipTests package
+      - name: Preparar navegador
+        working-directory: apps/web
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm exec playwright install --with-deps chromium
+      - name: Ejecutar flujo real de identidad
+        run: |
+          java -jar apps/api/target/api-0.0.1-SNAPSHOT.jar --server.port=18089 > /tmp/slotera-api.log 2>&1 &
+          pnpm --dir apps/web dev --host localhost --port 5173 --strictPort > /tmp/slotera-web.log 2>&1 &
+          for attempt in $(seq 1 60); do
+            if curl -fsS http://localhost:18089/actuator/health > /dev/null && curl -fsS http://localhost:5173/ > /dev/null; then break; fi
+            sleep 2
+          done
+          curl -fsS http://localhost:18089/actuator/health > /dev/null
+          pnpm --dir apps/web run test:e2e --reporter=line

@@ -44,7 +44,7 @@ El checkout principal está en la rama anterior y tiene cambios locales previos 
 ## Seguimiento
 
 - [x] Plan y decisiones aprobados
-- [ ] Rama e implementación
+- [x] Rama e implementación
 - [ ] Verificación y evidencia
 - [ ] Resultado aprobado, merge y cierre verificados
 

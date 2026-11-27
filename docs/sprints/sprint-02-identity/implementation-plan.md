@@ -66,3 +66,10 @@ Roadmap: 10 h. Estimación inicial propuesta 18–30 h para incluir configuraci�
 ## Aprobación previa
 
 Estado: APPROVED | Aprobador: usuario | Fecha: 2026-11-27 | Referencia: «Apruebo el plan y las decisiones tomadas, puedes comenzar la implementacion» | Versión aprobada: 1. Incluye ADR-004, la excepción de `/me` y las políticas descritas. La aprobación del plan no equivale a autorización de merge.
+
+## Decisiones y evidencia de implementación
+
+- Imagen local `26.8.2-3` fijada por digest `sha256:75b5c435a83b530caba5923922f93d47b2e3f8b4ad9e79200581122996653e55`; JVM observada Red Hat OpenJDK 21.0.13.1. La aplicación usa `keycloak-js` 26.2.5.
+- El realm añade los scopes `basic`, `profile` y `email`. La primera prueba real mostró que sin `basic` el token no incluía `sub`; se corrigió el archivo y se confirmó en una importación separada que `basic` está asignado. En el realm de desarrollo existente se aplicó el cambio por API administrativa sin borrar usuarios.
+- La SPA usa un control periódico de renovación y una interfaz mínima; Keycloak 26.8.2 muestra sus pantallas de registro y recuperación en inglés. En la pantalla de registro se observó un `TypeError` en un script de la plantilla predeterminada de Keycloak cuando la contraseña se configura después de verificar correo. El flujo probado terminó correctamente; queda registrado para revisión, no se atribuye al código React.
+- El desarrollador explicó correctamente `iss`, `sub`, `aud` y `exp` en el ejercicio. Se revisó que `exp` representa segundos desde la época Unix y que la firma debe verificarse antes de confiar en los claims.

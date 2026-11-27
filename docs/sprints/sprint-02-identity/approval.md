@@ -1,10 +1,10 @@
 # Acta de aprobación — Sprint 02
 
-Estado: PENDING | Rama: pendiente | SHA candidato: pendiente | PR: pendiente.
+Estado: VERIFYING | Rama: sprint/02-identity | SHA candidato y PR: pendientes.
 
 ## Resultado y evidencias
 
-Pendientes de implementación y verificación. Registrar los resultados observados en [aceptación y pruebas](acceptance-and-test-plan.md), sin guardar tokens, enlaces de recuperación ni credenciales.
+Implementación en verificación. Consultar [aceptación y pruebas](acceptance-and-test-plan.md) para resultados locales; CI y verificación final siguen pendientes. La página predeterminada de registro de Keycloak emite un error de JavaScript al intentar asociar un listener a un campo de contraseña ausente cuando se configura la contraseña después de verificar correo. El flujo completo se probó, pero el error queda pendiente de evaluación. El logout no revoca inmediatamente access tokens ya emitidos y la autorización multiempresa corresponde a Sprint 03.
 
 ## Definition of Done
 

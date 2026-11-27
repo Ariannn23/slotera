@@ -33,4 +33,13 @@ En local, levantar servicios y realizar registro, verificación y recuperación 
 |---|---|---|---|---|---|
 | — | Pendiente | — | — | PENDING | — |
 
+## Evidencia local parcial — 27-11-2026
+
+- PostgreSQL 17, Keycloak 26.8.2-3 y Mailpit iniciados con Podman Compose y volúmenes separados. El contenedor de Keycloak informó OpenJDK Red Hat 21.0.13.1. El realm limpio incluyó los scopes `basic` y `email`.
+- Se aplicó V2 sobre la base de desarrollo con V1 y se verificaron V1 y V2 exitosas en una base vacía separada. La prueba transaccional y concurrente de perfiles está implementada; su ejecución final queda por registrar con el SHA candidato.
+- La prueba Playwright con Keycloak real completó registro, correo de verificación, contraseña, acceso y `/me`, renovación al avanzar reloj, logout, recuperación, nuevo acceso, rechazo de ID token y enlace inválido. Comprobó que un access token emitido sigue siendo válido tras logout hasta expirar, y revisó almacenamiento y 375/768/1280 px. Un aviso de la plantilla de Keycloak queda documentado en el plan. No se guardan tokens ni enlaces como evidencia versionada.
+- La suite local antes de las últimas pruebas añadidas pasó con 16 pruebas API, ninguna omitida; web pasó typecheck, lint, una prueba Vitest y build. Se repetirá `clean verify` para el commit candidato.
+- El ejercicio del desarrollador identificó correctamente emisor, sujeto, audiencia y vencimiento. Se explicó la representación de `exp` y la validación de firma.
+- Pendientes: CI del PR, verificación final de regresiones, evaluación explícita de indisponibilidad/rotación JWKS y registro de resultados en esta matriz. Las pruebas locales se realizaron en la copia aislada, con la API en 18089 y PostgreSQL de prueba en 55435.
+
 Revisar reportes efectivos, cantidades y pruebas omitidas. Si no hay navegador, contenedor, correo, CI o acceso al proveedor, marcar BLOCKED y conservar las demás evidencias. No se declaran probadas membresías ni aislamiento multiempresa hasta Sprint 03. Estados: PENDING, PASS, FAIL, BLOCKED y NOT_APPLICABLE con motivo.

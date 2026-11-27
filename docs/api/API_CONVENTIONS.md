@@ -1,6 +1,6 @@
 # Contrato REST preliminar
 
-Base `/api/v1`. JSON, OpenAPI, validación Jakarta, DTOs separados de entidades. Paginación, filtros y orden estable. Endpoints internos usan `Authorization: Bearer ...` y `X-Organization-Id` validado contra membresía. Público resuelve slug y comprueba pertenencia del recurso.
+Base `/api/v1`. JSON, OpenAPI, validación Jakarta, DTOs separados de entidades. Paginación, filtros y orden estable. Endpoints internos requieren `Authorization: Bearer ...`. Los endpoints asociados a una organización requerirán `X-Organization-Id` validado contra membresía en Sprint 03. `/me` requiere identidad y funciona sin organización seleccionada. Público resuelve slug y comprueba pertenencia del recurso.
 
 | Método | Ruta | Acción |
 |---|---|---|
@@ -65,4 +65,8 @@ El manejador HTTP responde con `application/problem+json`, `type`, `title`, `sta
 
 La utilidad de paginación recibe `page` desde 0 y `size` entre 1 y 100, con valores iniciales 0 y 20. `sort` usa `campo,asc` o `campo,desc`; el controlador define explícitamente campos permitidos y debe incluir `id` como desempate. Un parámetro repetido, dirección o campo no admitido, valor no numérico o fuera de rango produce 400. Cada módulo definirá el JSON de sus listados y cuándo aplica esta utilidad.
 
-Springdoc 3.0.3 habilita `/v3/api-docs` y Swagger UI solo con los perfiles `dev` y `test`. El perfil `prod` los desactiva y el arranque rechaza combinar `prod` con `dev` o `test`, independientemente del orden. La API aún no implementa autenticación ni autorización, que corresponden a sprints posteriores. El estado de salud de Actuator se mantiene fuera de `/api/v1`.
+Springdoc 3.0.3 habilita `/v3/api-docs` y Swagger UI solo con los perfiles `dev` y `test`. El perfil `prod` los desactiva y el arranque rechaza combinar `prod` con `dev` o `test`, independientemente del orden. El estado de salud de Actuator se mantiene fuera de `/api/v1`.
+
+## Perfil autenticado
+
+`GET /api/v1/me` recibe un access token Bearer válido para la audiencia de Slotera, con correo verificado. Responde 200 con `id`, `email` y `emailVerified`. La primera llamada crea la identidad local transaccionalmente por `(issuer, subject)`. Una credencial ausente o inválida produce 401 con `WWW-Authenticate: Bearer`; correo no verificado o usuario local inactivo produce 403. Estos errores usan `application/problem+json`. No se requiere `X-Organization-Id` para este endpoint.

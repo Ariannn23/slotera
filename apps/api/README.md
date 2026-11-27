@@ -8,4 +8,6 @@ Requiere Java 21 y PostgreSQL disponible. Desde esta carpeta, `./mvnw.cmd clean 
 
 La configuración sin perfil conserva el arranque local y mantiene OpenAPI deshabilitado. Para desarrollo, `./mvnw.cmd spring-boot:run -Dspring-boot.run.profiles=dev` habilita `/v3/api-docs` y `/swagger-ui/index.html`. El perfil `test` también los habilita. `prod` exige `DATABASE_URL`, `DATABASE_USER` y `DATABASE_PASSWORD`, desactiva ambas rutas y emite logs estructurados ECS. No se puede combinar `prod` con `dev` o `test`. Estos perfiles no habilitan autenticación. La identidad se implementará en el Sprint 02.
 
+La API usa Keycloak como emisor OIDC y requiere `OIDC_ISSUER`, `OIDC_AUDIENCE` y `WEB_ORIGIN` en producción. En desarrollo sus valores predeterminados corresponden al Compose local. `GET /api/v1/me` requiere un access token válido con correo verificado y no requiere organización. Ver `src/main/java/com/slotera/identity/README.md` para permisos y pruebas.
+
 Las convenciones de errores y paginación están en `docs/api/API_CONVENTIONS.md`; los mecanismos transversales se describen en `src/main/java/com/slotera/shared/README.md`.

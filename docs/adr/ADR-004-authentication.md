@@ -9,4 +9,4 @@ Keycloak OIDC + Spring Security resource server.
 Autenticación propia: más riesgo y mantenimiento.
 
 ## Consecuencias
-Mayor infraestructura; sesión SPA, claims, alta y revocación pendientes.
+Mayor infraestructura. La SPA usa Authorization Code con PKCE S256 y mantiene tokens en memoria. La API valida firma, emisor, audiencia, vigencia, sujeto y tipo de token. La identidad local se vincula por `(issuer, subject)` en la primera llamada autenticada a `/me`, que no requiere organización. El correo debe estar verificado. El logout no garantiza invalidación inmediata de access tokens ya emitidos; su tiempo de vida local se configura en cinco minutos. La autorización por membresía corresponde al Sprint 03. Registro y recuperación se delegan a Keycloak.

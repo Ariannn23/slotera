@@ -1,7 +1,7 @@
 # Sprint XX — [Nombre]
 
 Estado: PLANNED | Responsable: [ ] | Semana: [ ] | Horas: [ ]
-Base: main | Rama: sprint/XX-nombre | Roadmap: [enlace]
+Base: develop | Rama: sprint/XX-nombre | Roadmap: [enlace]
 
 ## Objetivo de negocio y aprendizaje
 [Problema, resultado medible, conceptos Java/Spring y ejercicio]

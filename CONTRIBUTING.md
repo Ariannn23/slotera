@@ -1,18 +1,18 @@
 # Flujo Git y calidad
 
-Ramas: `main`, `sprint/00-bootstrap`, `sprint/01-backend-foundation`, etc. Crear cada rama desde main actualizado. No trabajar directamente en main.
+Sprint 00 continúa desde y hacia `main`. Después de su cierre, crear `develop` desde `main` y crear cada nueva rama de sprint desde `develop` actualizado. Los PR de sprint apuntan a `develop`. La promoción de `develop` a `main` requiere autorización y revisión específicas.
 
 ```
-git switch main
+git switch develop
 git pull --ff-only
-git switch -c sprint/00-bootstrap
+git switch -c sprint/01-backend-foundation
 # implementar y verificar
 git add .
 git commit -m "feat: inicializar infraestructura del proyecto"
-git push -u origin sprint/00-bootstrap
+git push -u origin sprint/01-backend-foundation
 ```
 
-Abrir PR, revisar CI y cambios, fusionar tras aprobación; después actualizar main y eliminar rama local/remota si corresponde. No forzar push ni eliminar ramas ajenas.
+Abrir PR hacia develop, revisar CI y cambios, fusionar tras aprobación; después actualizar develop y eliminar rama local/remota si corresponde. No forzar push ni eliminar ramas ajenas.
 
 Tipos: feat, fix, docs, test, refactor, chore, ci. Ejemplos: `test: validar aislamiento entre organizaciones`, `fix: corregir superposición de intervalos`.
 

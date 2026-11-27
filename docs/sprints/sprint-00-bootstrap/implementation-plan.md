@@ -40,3 +40,10 @@ Ejercicio reservado al usuario: iniciar PostgreSQL con Compose, explicar qué se
 ## Aprobación previa
 
 Estado: APPROVED · Aprobador: usuario · Fecha: 2026-11-27 · Referencia: respuesta «Si aprobado» en la conversación. Una aprobación del plan no autoriza el merge.
+
+## Registro de decisiones
+
+- El usuario autorizó el 27-11-2026 que Sprint 00 continúe desde `main` y que, después de su cierre, `develop` se cree desde `main` y sirva de base a las ramas futuras.
+- Selección inicial generada por Spring Initializr: Spring Boot 4.0.10, Spring Modulith 2.0.8 y Maven Wrapper 3.10.2 con Java 21. La integración JPA de eventos Modulith queda para el sprint de eventos, pues necesita su propio esquema.
+- PostgreSQL usa el puerto local 55432 porque 5432 estaba ocupado. La comprobación manual de health utilizó 18080 porque 8080 también estaba ocupado.
+- En el equipo se usa Podman Compose como proveedor compatible y Microsoft OpenJDK 21.0.13.1. Frontend: Node 24.18.0 y pnpm 10.33.0.

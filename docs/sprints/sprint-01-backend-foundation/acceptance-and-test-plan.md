@@ -37,6 +37,8 @@ Reservas, concurrencia, idempotencia, aislamiento de datos de organizaciones y r
 | 2026-11-27 | Arranque de API en `prod` sin variables | Proceso local aislado | Código 1, sin arranque exitoso. | PASS | Salida local |
 | 2026-11-27 | Arranque `prod` con contraseña sintética inválida | Proceso local aislado, ECS | Código 1; contraseña sintética ausente en logs. MockMvc también comprobó ausencia de token y nombre sintéticos en salida capturada. | PASS | Comprobaciones locales |
 
-La primera ejecución MVC devolvió 404 porque el controlador sintético no estaba registrado; se corrigió y se repitió. La primera prueba de fixtures Modulith no encontró clases de test por la opción de importación predeterminada; se ajustó para incluirlas y se verificó que un ciclo produce una violación. Un `clean verify` inicial encontró el JAR bloqueado por un proceso de la sesión anterior; se detuvo ese proceso y se repitió. El commit candidato y CI están pendientes.
+La primera ejecución MVC devolvió 404 porque el controlador sintético no estaba registrado; se corrigió y se repitió. La primera prueba de fixtures Modulith no encontró clases de test por la opción de importación predeterminada; se ajustó para incluirlas y se verificó que un ciclo produce una violación. Un `clean verify` inicial encontró el JAR bloqueado por un proceso de la sesión anterior; se detuvo ese proceso y se repitió.
+
+CI del PR #3: ejecución 46077400666 aprobó API y web en el commit `4e3d3fe`. Este registro documental genera un nuevo commit, cuya CI debe comprobarse antes de la fusión.
 
 Registrar defectos, causa, corrección, revalidación y evidencia. Estados: PENDING, PASS, FAIL, BLOCKED y NOT_APPLICABLE con motivo.

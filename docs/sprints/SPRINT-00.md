@@ -2,7 +2,7 @@
 
 [Documentación de ejecución y plan en revisión](sprint-00-bootstrap/README.md)
 
-Semana(s): 1 · Presupuesto: 10 h · Estado: planificado
+Semana(s): 1 · Presupuesto: 10 h · Estado: cerrado
 
 Rama: `sprint/00-bootstrap`. Dependencia: sprint anterior cerrado (salvo 00).
 

@@ -1,5 +1,7 @@
 # Sprint 01 — Fundamentos backend
 
+[Documentación de ejecución y plan en revisión](sprint-01-backend-foundation/README.md)
+
 Semana(s): 2 · Presupuesto: 10 h · Estado: planificado
 
 Rama: `sprint/01-backend-foundation`. Dependencia: sprint anterior cerrado (salvo 00).

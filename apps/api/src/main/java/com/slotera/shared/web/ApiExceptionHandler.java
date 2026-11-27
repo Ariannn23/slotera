@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -50,6 +51,11 @@ public class ApiExceptionHandler {
     @ExceptionHandler(NoResourceFoundException.class)
     public ProblemDetail notFound() {
         return problem(HttpStatus.NOT_FOUND, "NOT_FOUND", "No se encontró el recurso solicitado.");
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ProblemDetail forbidden() {
+        return problem(HttpStatus.FORBIDDEN, "FORBIDDEN", "No tienes permiso para realizar esta acción.");
     }
 
     @ExceptionHandler(Exception.class)

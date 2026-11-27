@@ -4,7 +4,7 @@ UUID como identificadores, TIMESTAMPTZ para instantes, NUMERIC(12,2) y BigDecima
 
 | Tabla | Campos/propósito principales |
 |---|---|
-| users | id, issuer, subject, email, estado, timestamps |
+| users | id, issuer, subject, email, email_verified, status, created_at, updated_at; `(issuer, subject)` único |
 | organizations | id, slug único, nombre, razón social, correo, teléfono, logo, zona, moneda, estado |
 | memberships | organization_id, user_id, role, status; par único |
 | invitations | organization_id, email, role, token_hash, expires_at, status |

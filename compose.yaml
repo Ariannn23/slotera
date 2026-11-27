@@ -6,7 +6,7 @@ services:
       POSTGRES_USER: slotera
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-slotera_local}
     ports:
-      - "127.0.0.1:55432:5432"
+      - "127.0.0.1:${SLOTERA_DB_PORT:-55432}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -14,5 +14,46 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+  keycloak-db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: ${KEYCLOAK_DB_PASSWORD:?Configura KEYCLOAK_DB_PASSWORD}
+    volumes:
+      - keycloak_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U keycloak -d keycloak"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.8.2-3@sha256:75b5c435a83b530caba5923922f93d47b2e3f8b4ad9e79200581122996653e55
+    command: ["start-dev", "--import-realm"]
+    environment:
+      KC_DB: postgres
+      KC_DB_URL_HOST: keycloak-db
+      KC_DB_URL_DATABASE: keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD:?Configura KEYCLOAK_DB_PASSWORD}
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KEYCLOAK_ADMIN_USERNAME:?Configura KEYCLOAK_ADMIN_USERNAME}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:?Configura KEYCLOAK_ADMIN_PASSWORD}
+      KC_HOSTNAME: ${KEYCLOAK_PUBLIC_URL:-http://localhost:18088}
+      KC_HEALTH_ENABLED: "true"
+    ports:
+      - "127.0.0.1:${KEYCLOAK_PORT:-18088}:8080"
+    volumes:
+      - ./infrastructure/keycloak:/opt/keycloak/data/import:ro
+      - ./infrastructure/keycloak/themes/slotera:/opt/keycloak/themes/slotera:ro
+    depends_on:
+      keycloak-db:
+        condition: service_healthy
+      mailpit:
+        condition: service_started
+  mailpit:
+    image: docker.io/axllent/mailpit:v1.28
+    ports:
+      - "127.0.0.1:${MAILPIT_UI_PORT:-18025}:8025"
 volumes:
   postgres_data:
+  keycloak_data:

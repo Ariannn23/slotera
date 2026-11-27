@@ -1,5 +1,7 @@
 # Sprint 02 — Identidad
 
+[Documentación de ejecución y plan en revisión](sprint-02-identity/README.md)
+
 Semana(s): 3 · Presupuesto: 10 h · Estado: planificado
 
 Rama: `sprint/02-identity`. Dependencia: sprint anterior cerrado (salvo 00).

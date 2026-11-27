@@ -1,6 +1,8 @@
 # Seguridad y amenazas
 
-Keycloak gestiona credenciales, verificación y recuperación; Spring Security valida issuer, audiencia, firma y expiración de JWT. OIDC Authorization Code + PKCE para SPA; decidir almacenamiento de tokens y sesión antes de Sprint 02. Identidad interna ligada a issuer/subject. Nunca confiar en roles o organización enviados por cliente sin verificación.
+Keycloak gestiona credenciales, verificación y recuperación; Spring Security valida issuer, audiencia, firma y expiración de JWT. OIDC Authorization Code + PKCE para SPA. Identidad interna ligada a issuer/subject. Nunca confiar en roles o organización enviados por cliente sin verificación.
+
+Sprint 02 implementa Authorization Code con PKCE S256 y mantiene los tokens de acceso y renovación en memoria del adaptador. El resource server valida firma RS256, emisor, audiencia, expiración, `nbf`, sujeto y tipo `Bearer`; requiere correo verificado para `/me`. La revocación de sesión no invalida inmediatamente un access token ya emitido que el resource server valide localmente. El token permanece aceptable hasta su expiración. La autorización por membresía se implementará en Sprint 03.
 
 | Amenaza | Control |
 |---|---|

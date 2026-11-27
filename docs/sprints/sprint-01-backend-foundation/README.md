@@ -1,6 +1,6 @@
 # Sprint 01 — Fundamentos backend
 
-Estado: IN_PROGRESS | Semana orientativa: 2 | Estimación del roadmap: 10 h
+Estado: VERIFYING | Semana orientativa: 2 | Estimación del roadmap: 10 h
 Base prevista: `develop` en `23df02d` | Rama propuesta: `sprint/01-backend-foundation`
 [Ficha del roadmap](../SPRINT-01.md)
 
@@ -35,7 +35,7 @@ Las cifras de paginación, formato de error y perfiles del plan son propuestas s
 ## Seguimiento
 
 - [x] Plan aprobado
-- [ ] Rama e implementación
+- [x] Rama e implementación
 - [ ] Verificación y evidencia
 - [ ] Resultado aprobado, merge y cierre verificados
 

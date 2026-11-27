@@ -1,10 +1,12 @@
 # Acta de aprobación — Sprint 01
 
-Estado: PENDING | Rama, SHA candidato y PR: pendientes.
+Estado: VERIFYING | Rama: sprint/01-backend-foundation | Código verificado: `cec28d3` | SHA candidato y PR: pendientes.
 
 ## Resultado, evidencia y riesgos
 
-Pendientes de implementación. Registrar resultados en la [matriz](acceptance-and-test-plan.md), incluyendo regresiones, limitaciones y decisiones aprobadas.
+Infraestructura HTTP, perfiles, documentación y verificaciones implementados. Ver [matriz](acceptance-and-test-plan.md) para resultados reales. El ejercicio de `record` y `@NotBlank` fue aportado por el desarrollador, revisado y ejecutado en pruebas. Falta CI del commit candidato y revisión humana del resultado.
+
+El manejador registra un mensaje genérico para errores inesperados sin traza ni datos de la excepción. Esto limita el diagnóstico y deberá revisarse con la estrategia de observabilidad, preservando el tratamiento de datos sensibles. Las verificaciones de logs usan muestras sintéticas y no prueban todos los escenarios posibles. La autenticación y el aislamiento entre organizaciones se implementarán en sus sprints. La pantalla de frontend sigue siendo provisional.
 
 ## Definition of Done
 

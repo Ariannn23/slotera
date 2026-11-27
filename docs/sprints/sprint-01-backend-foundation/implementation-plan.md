@@ -50,3 +50,10 @@ Estado: APPROVED | Aprobador: usuario | Fecha: 2026-11-27 | Referencia: «Aprueb
 
 - [Matriz de compatibilidad de springdoc](https://springdoc.org/)
 - [Logging estructurado de Spring Boot](https://docs.spring.io/spring-boot/reference/features/logging.html)
+
+## Decisiones de implementación
+
+- Se seleccionó springdoc 3.0.3 para Spring Boot 4.0.10, de la línea 3.0.x indicada en la matriz oficial. El starter de validación usa la versión administrada por Spring Boot.
+- La combinación de `prod` con `dev` o `test` se rechaza al iniciar, con independencia del orden, para impedir exposición accidental de OpenAPI. Sin perfil activo se preserva el arranque local del Sprint 00.
+- El mensaje público para cada campo inválido es genérico para no reflejar valores. El registro del manejador para errores inesperados es genérico y no incluye la excepción; se registra como limitación para diagnóstico posterior.
+- El ejercicio entregado por el usuario se incorporó exclusivamente en tests con el import de Jakarta Validation. Se probaron su JSON válido y el nombre con solo espacios.

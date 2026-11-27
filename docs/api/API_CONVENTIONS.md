@@ -58,3 +58,11 @@ Respuesta 409, `application/problem+json` (RFC 9457):
 400 entradas inválidas, 401 sin identidad, 403 permisos insuficientes, 404 entidad inexistente o inaccesible cuando convenga evitar enumeración, 409 conflicto, 429 exceso de solicitudes, 500 error interno sin stack trace.
 
 Idempotencia: clave acotada por organización/actor/operación, hash del cuerpo, persistencia atómica del resultado; misma clave con cuerpo diferente se rechaza. Definir TTL y semántica de reintentos. Las rutas de recuperación, invitaciones, cambios de rol, clientes y enlaces seguros se completarán en su sprint; este inventario no es OpenAPI final.
+
+## Fundamentos implementados en Sprint 01
+
+El manejador HTTP responde con `application/problem+json`, `type`, `title`, `status`, `detail`, `instance` y `code`. Para validación se añade `fields` con nombres de campo y mensajes genéricos, sin valores enviados. JSON inválido y parámetros de paginación inválidos producen 400; ruta inexistente 404; método no permitido 405; fallo inesperado 500 con detalle genérico. Las rutas de negocio de la tabla siguen siendo contratos preliminares.
+
+La utilidad de paginación recibe `page` desde 0 y `size` entre 1 y 100, con valores iniciales 0 y 20. `sort` usa `campo,asc` o `campo,desc`; el controlador define explícitamente campos permitidos y debe incluir `id` como desempate. Un parámetro repetido, dirección o campo no admitido, valor no numérico o fuera de rango produce 400. Cada módulo definirá el JSON de sus listados y cuándo aplica esta utilidad.
+
+Springdoc 3.0.3 habilita `/v3/api-docs` y Swagger UI solo con los perfiles `dev` y `test`. El perfil `prod` los desactiva y el arranque rechaza combinar `prod` con `dev` o `test`, independientemente del orden. La API aún no implementa autenticación ni autorización, que corresponden a sprints posteriores. El estado de salud de Actuator se mantiene fuera de `/api/v1`.

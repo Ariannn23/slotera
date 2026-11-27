@@ -1,8 +1,8 @@
 # Slotera
 
-Plan maestro v0.1 · Propuesta de desarrollo · Backend-first
+Plan maestro v0.1 · Desarrollo backend-first
 
-SaaS multiempresa de reservas exclusivas de recursos físicos. Java 21, Spring Boot, PostgreSQL y React. Horizonte orientativo: 16 semanas / 160 horas. Este paquete contiene planificación, no código ejecutable ni pruebas realizadas.
+SaaS multiempresa de reservas exclusivas de recursos físicos. Java 21, Spring Boot, PostgreSQL y React. Horizonte orientativo: 16 semanas / 160 horas. El Sprint 00 inicializó el proyecto; consultar el roadmap para el estado de cada sprint.
 
 ## Índice
 
@@ -29,12 +29,11 @@ SaaS multiempresa de reservas exclusivas de recursos físicos. Java 21, Spring B
 
 ## Inicio
 
-El bootstrap está en curso en `sprint/00-bootstrap`. Requiere Java 21, Node 24, pnpm 10 y Docker Compose o Podman Compose. Desde la raíz `podman compose up -d` inicia PostgreSQL local en el puerto 55432. Ver [API](apps/api/README.md) y [web](apps/web/README.md). Las credenciales predeterminadas son exclusivamente locales.
+Requiere Java 21, Node 24, pnpm 10 y Docker Compose o Podman Compose. Desde la raíz `podman compose up -d` inicia PostgreSQL local en el puerto 55432. Ver [API](apps/api/README.md) y [web](apps/web/README.md). Las credenciales predeterminadas son exclusivamente locales.
 
-1.  Copiar el contenido a la raíz del nuevo repositorio.
-2.  Leer AGENTS.md y las decisiones pendientes.
-3.  Revisar el alcance y aprobar el plan del Sprint 00 antes de generar código.
-4.  Mantener los documentos actualizados junto con cada cambio.
+1. Leer AGENTS.md y las decisiones pendientes.
+2. Revisar y aprobar el plan del sprint correspondiente antes de implementar.
+3. Mantener los documentos actualizados junto con cada cambio.
 
 ## Metodología de ingeniería
 

@@ -44,6 +44,7 @@ services:
       - "127.0.0.1:${KEYCLOAK_PORT:-18088}:8080"
     volumes:
       - ./infrastructure/keycloak:/opt/keycloak/data/import:ro
+      - ./infrastructure/keycloak/themes/slotera:/opt/keycloak/themes/slotera:ro
     depends_on:
       keycloak-db:
         condition: service_healthy

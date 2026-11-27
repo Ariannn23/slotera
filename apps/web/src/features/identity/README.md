@@ -7,3 +7,5 @@ El adaptador mantiene access token y refresh token en memoria. El módulo no los
 Configurar `VITE_KEYCLOAK_URL`, `VITE_KEYCLOAK_REALM`, `VITE_KEYCLOAK_CLIENT_ID` y `VITE_API_URL`; los valores públicos nunca deben incluir secretos. El realm local acepta únicamente el origen y redirección documentados. En caso de acceso sin correo verificado, el servidor rechaza el perfil. La autorización por organización corresponde al Sprint 03.
 
 Pruebas desde `apps/web`: `pnpm run typecheck`, `pnpm run lint`, `pnpm run test` y `pnpm run build`. Los flujos OIDC requieren Keycloak y navegador real.
+
+El tema `infrastructure/keycloak/themes/slotera` hereda `keycloak.v2` y corrige un listener de validación que se ejecutaba sin campo de contraseña durante el registro con verificación previa. El override procede de Keycloak 26.8.2 y debe revisarse al actualizar esa versión.

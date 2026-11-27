@@ -1,6 +1,7 @@
 {
   "realm": "slotera",
   "enabled": true,
+  "loginTheme": "slotera",
   "registrationAllowed": true,
   "verifyEmail": true,
   "resetPasswordAllowed": true,

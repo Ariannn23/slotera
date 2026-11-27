@@ -4,7 +4,7 @@ Estado: VERIFYING | Rama: sprint/02-identity | SHA candidato y PR: pendientes.
 
 ## Resultado y evidencias
 
-Implementación en verificación. Consultar [aceptación y pruebas](acceptance-and-test-plan.md) para resultados locales; CI y verificación final siguen pendientes. La página predeterminada de registro de Keycloak emite un error de JavaScript al intentar asociar un listener a un campo de contraseña ausente cuando se configura la contraseña después de verificar correo. El flujo completo se probó, pero el error queda pendiente de evaluación. El logout no revoca inmediatamente access tokens ya emitidos y la autorización multiempresa corresponde a Sprint 03.
+Implementación en verificación. Consultar [aceptación y pruebas](acceptance-and-test-plan.md) para resultados locales; CI y verificación final siguen pendientes. Se corrigió un error de JavaScript de la plantilla predeterminada de Keycloak mediante un override mínimo de tema, que debe revisarse al actualizar Keycloak. El logout no revoca inmediatamente access tokens ya emitidos y la autorización multiempresa corresponde a Sprint 03.
 
 ## Definition of Done
 

@@ -16,9 +16,7 @@ test('registro, verificación, acceso, cierre y recuperación con Keycloak', asy
   let pkceObserved = false
   let refreshObserved = false
   const pageErrors: string[] = []
-  page.on('pageerror', error => {
-    if (new URL(page.url()).origin === 'http://localhost:5173') pageErrors.push(error.message)
-  })
+  page.on('pageerror', error => pageErrors.push(error.message))
 
   page.on('request', outgoing => {
     if (outgoing.url().includes('/protocol/openid-connect/registrations')) {
@@ -105,6 +103,10 @@ test('registro, verificación, acceso, cierre y recuperación con Keycloak', asy
   await expect(page.getByText(email)).toBeVisible()
   await page.getByRole('button', { name: 'Cerrar sesión' }).click()
   await page.getByRole('button', { name: 'Iniciar sesión' }).click()
+  await page.getByLabel('Username or email').fill(username)
+  await page.getByLabel('Password', { exact: true }).fill(`Wrong1!${randomBytes(12).toString('hex')}`)
+  await page.getByRole('button', { name: 'Sign In' }).click()
+  await expect(page.getByText('Invalid username or password.')).toBeVisible()
   await page.getByLabel('Username or email').fill(username)
   await page.getByLabel('Password', { exact: true }).fill(newPassword)
   await page.getByRole('button', { name: 'Sign In' }).click()

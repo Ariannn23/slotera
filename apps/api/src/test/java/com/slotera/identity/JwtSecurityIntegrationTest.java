@@ -1,6 +1,7 @@
 package com.slotera.identity;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.atomic.AtomicReference;
 
 import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.JWSHeader;
@@ -37,6 +39,9 @@ import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.support.TransactionTemplate;
+import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm;
+import org.springframework.security.oauth2.jwt.JwtException;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -45,6 +50,7 @@ class JwtSecurityIntegrationTest {
 
     private static final RSAKey SIGNING_KEY;
     private static final RSAKey WRONG_KEY;
+    private static final AtomicReference<JWKSet> PUBLISHED_KEYS;
     private static final HttpServer JWKS_SERVER;
     private static final String ISSUER;
 
@@ -52,9 +58,10 @@ class JwtSecurityIntegrationTest {
         try {
             SIGNING_KEY = new RSAKeyGenerator(2048).keyID("slotera-test-key").generate();
             WRONG_KEY = new RSAKeyGenerator(2048).keyID("slotera-test-key").generate();
+            PUBLISHED_KEYS = new AtomicReference<>(new JWKSet(SIGNING_KEY.toPublicJWK()));
             JWKS_SERVER = HttpServer.create(new InetSocketAddress("127.0.0.1", 0), 0);
             JWKS_SERVER.createContext("/realms/test/protocol/openid-connect/certs", exchange -> {
-                byte[] body = new JWKSet(SIGNING_KEY.toPublicJWK()).toString().getBytes(StandardCharsets.UTF_8);
+                byte[] body = PUBLISHED_KEYS.get().toString().getBytes(StandardCharsets.UTF_8);
                 exchange.getResponseHeaders().set("Content-Type", "application/json");
                 exchange.sendResponseHeaders(200, body.length);
                 try (var output = exchange.getResponseBody()) {
@@ -204,6 +211,30 @@ class JwtSecurityIntegrationTest {
         });
         assertThat(jdbc.queryForObject("SELECT count(*) FROM users WHERE issuer = ? AND subject = ?",
                 Integer.class, ISSUER, subject)).isZero();
+    }
+
+    @Test
+    void refreshesKeysAfterRotationAndRejectsUnverifiableToken() throws Exception {
+        String firstToken = token("initial-" + UUID.randomUUID(), ISSUER, "slotera-api", Instant.now().plusSeconds(300),
+                Instant.now().minusSeconds(1), true, SIGNING_KEY);
+        mvc.perform(get("/api/v1/me").header("Authorization", "Bearer " + firstToken)).andExpect(status().isOk());
+        RSAKey rotated = new RSAKeyGenerator(2048).keyID("slotera-rotated-key").generate();
+        PUBLISHED_KEYS.set(new JWKSet(List.of(SIGNING_KEY.toPublicJWK(), rotated.toPublicJWK())));
+        try {
+            String rotatedToken = token("rotated-" + UUID.randomUUID(), ISSUER, "slotera-api", Instant.now().plusSeconds(300),
+                    Instant.now().minusSeconds(1), true, rotated);
+            mvc.perform(get("/api/v1/me").header("Authorization", "Bearer " + rotatedToken)).andExpect(status().isOk());
+
+            HttpServer unavailable = HttpServer.create(new InetSocketAddress("127.0.0.1", 0), 0);
+            int port = unavailable.getAddress().getPort();
+            unavailable.start();
+            unavailable.stop(0);
+            NimbusJwtDecoder decoder = NimbusJwtDecoder.withJwkSetUri("http://127.0.0.1:" + port + "/jwks")
+                    .jwsAlgorithm(SignatureAlgorithm.RS256).build();
+            assertThatThrownBy(() -> decoder.decode(rotatedToken)).isInstanceOf(JwtException.class);
+        } finally {
+            PUBLISHED_KEYS.set(new JWKSet(SIGNING_KEY.toPublicJWK()));
+        }
     }
 
     private static String token(String subject, String issuer, String audience, Instant expiration,

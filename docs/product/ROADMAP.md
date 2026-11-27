@@ -20,7 +20,7 @@
 | [13](../sprints/SPRINT-13.md) | 16 | 10 | DevOps y entrega | Versión v1.0.0 candidata con smoke tests |
 
 ## Seguimiento
-- [ ] Sprint 00: Inicialización
+- [x] Sprint 00: Inicialización
 - [ ] Sprint 01: Fundamentos backend
 - [ ] Sprint 02: Identidad
 - [ ] Sprint 03: Multiempresa

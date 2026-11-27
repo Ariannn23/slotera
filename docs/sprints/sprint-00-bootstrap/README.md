@@ -1,6 +1,6 @@
 # Sprint 00 — Inicialización
 
-Estado: PLAN_REVIEW · Estimación orientativa: 10 horas · Base prevista: `main` · Rama prevista: `sprint/00-bootstrap`
+Estado: CLOSED · Estimación orientativa: 10 horas · Base: `main` · Rama: `sprint/00-bootstrap`
 
 [Ficha del roadmap](../SPRINT-00.md)
 
@@ -30,9 +30,9 @@ El remoto consultado el 27-11-2026 no devolvió referencias y la carpeta local n
 
 ## Seguimiento
 
-- [ ] Plan aprobado
-- [ ] Implementación
-- [ ] Verificación
-- [ ] Cierre aprobado y merge comprobado
+- [x] Plan aprobado
+- [x] Implementación
+- [x] Verificación
+- [x] Cierre aprobado y merge comprobado
 
 [Plan](implementation-plan.md) · [Aceptación](acceptance-and-test-plan.md) · [Acta](approval.md)

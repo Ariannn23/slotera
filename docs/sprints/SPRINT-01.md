@@ -2,7 +2,7 @@
 
 [Documentación de ejecución y plan en revisión](sprint-01-backend-foundation/README.md)
 
-Semana(s): 2 · Presupuesto: 10 h · Estado: planificado
+Semana(s): 2 · Presupuesto: 10 h · Estado: cerrado
 
 Rama: `sprint/01-backend-foundation`. Dependencia: sprint anterior cerrado (salvo 00).
 
@@ -39,4 +39,4 @@ Base REST reutilizable.
 
 ## Evidencias y cierre
 
-Pendiente de ejecución. Registrar comandos, resultados, riesgos, cambios de alcance y aprendizajes.
+Implementación aprobada y fusionada en el PR #3. Ver la documentación de ejecución para pruebas, riesgos y aprendizaje.

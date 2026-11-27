@@ -41,4 +41,6 @@ La primera ejecución MVC devolvió 404 porque el controlador sintético no esta
 
 CI del PR #3: ejecución 46077400666 aprobó API y web en el commit `4e3d3fe`. Este registro documental genera un nuevo commit, cuya CI debe comprobarse antes de la fusión.
 
+La CI final del PR #3, ejecución 46078430418, pasó para API y web en el commit administrativo `1671947`. La fusión a `develop` se verificó en `0c32d546f76075d6f20d12056c4dea6ff9511f3a`.
+
 Registrar defectos, causa, corrección, revalidación y evidencia. Estados: PENDING, PASS, FAIL, BLOCKED y NOT_APPLICABLE con motivo.

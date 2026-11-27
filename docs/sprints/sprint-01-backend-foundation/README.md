@@ -1,6 +1,6 @@
 # Sprint 01 — Fundamentos backend
 
-Estado: READY_FOR_REVIEW | Semana orientativa: 2 | Estimación del roadmap: 10 h
+Estado: CLOSED | Semana orientativa: 2 | Estimación del roadmap: 10 h
 Base prevista: `develop` en `23df02d` | Rama propuesta: `sprint/01-backend-foundation`
 [Ficha del roadmap](../SPRINT-01.md)
 
@@ -30,13 +30,13 @@ El controlador recibe DTO, Spring valida y el caso de uso responde o produce un 
 
 ## Decisiones propuestas y riesgos
 
-Las cifras de paginación, formato de error y perfiles del plan son propuestas sujetas a tu aprobación. No se ha fijado un contrato global de logs ni una política completa de OpenAPI en producción. Las pruebas sintéticas no demuestran aislamiento multiempresa, que se implementará y verificará con módulos reales. ADR-001 sigue documentado como propuesto y no se declara aprobado por este sprint. Diez horas son una referencia; revisar tiempo real y dividir el trabajo si la verificación y el aprendizaje lo requieren.
+El usuario aprobó las cifras de paginación, el formato de error y los perfiles del plan. No se ha fijado un contrato global de logs ni una política completa de OpenAPI en producción. Las pruebas sintéticas no demuestran aislamiento multiempresa, que se implementará y verificará con módulos reales. ADR-001 sigue documentado como propuesto y no se declara aprobado por este sprint. Diez horas fueron una referencia; no se registró una medición de tiempo real.
 
 ## Seguimiento
 
 - [x] Plan aprobado
 - [x] Rama e implementación
 - [x] Verificación y evidencia
-- [ ] Resultado aprobado, merge y cierre verificados
+- [x] Resultado aprobado, merge y cierre verificados
 
 [Plan de implementación](implementation-plan.md) · [Aceptación y pruebas](acceptance-and-test-plan.md) · [Acta](approval.md)

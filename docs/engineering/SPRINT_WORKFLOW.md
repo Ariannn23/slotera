@@ -31,16 +31,16 @@ Crear `README.md`, `implementation-plan.md`, `acceptance-and-test-plan.md` y `ap
 Presentar al usuario objetivo, alcance/exclusiones, riesgos, alternativas, archivos, comandos, pruebas, decisiones y estimación. **Esperar aprobación explícita del plan**; guardar fecha, referencia y alcance aprobado. Si el plan cambia sustancialmente, volver a esta puerta. No confundir aprobación del plan con aprobación de merge.
 
 ## Fase 3 — Git e implementación aislada
-Base de Slotera: `main`, no `develop` ni `team/develop` de Torcly. Si aún no existe repositorio/remoto, documentar y ejecutar el bootstrap aprobado; no simular PR.
+Sprint 00 conserva su base y PR hacia `main`. Tras verificar su cierre, crear `develop` desde `main`. Para los siguientes sprints la base y destino del PR será `develop`. La promoción posterior a `main` requiere autorización específica.
 
 ```bash
 git status --short
 git fetch origin
-git switch main
-git pull --ff-only origin main
+git switch develop
+git pull --ff-only origin develop
 git switch -c sprint/XX-nombre
 ```
-Usar rama existente si corresponde y comprobar su base. Si diverge main o hay conflictos, detener y acordar resolución. No resetear, limpiar ni usar force push.
+Usar rama existente si corresponde y comprobar su base. Si diverge develop o hay conflictos, detener y acordar resolución. No resetear, limpiar ni usar force push.
 
 Implementar en incrementos pequeños conforme al plan: migraciones, dominio, aplicación, adaptadores, contratos, UI y tests según dependencias reales. Revisar módulos y componentes existentes antes de crear nuevos. Actualizar README de módulo y ADR cuando corresponda. Explicar conceptos y dejar ejercicios acordados. Registrar desviaciones en el plan; pedir nueva aprobación si cambia el alcance o una decisión crítica.
 
@@ -62,11 +62,11 @@ Estados por caso: `PENDING`, `PASS`, `FAIL`, `BLOCKED`, `NOT_APPLICABLE` (justif
 
 ## Fase 5 — Aprobación, fusión y cierre
 1. Completar `approval.md` con evidencia y estado `READY_FOR_REVIEW` solo si DoD técnico está satisfecho. Presentar resumen de entregables, comandos, resultados, cambios, riesgos y aprendizaje.
-2. Abrir PR de la rama a `main`, incluir enlaces a los documentos, riesgos y evidencia. Revisar CI, comentarios y diff final. Solicitar aprobación humana explícita y autorización de merge; no autoaprobar.
+2. Abrir PR de la rama a `develop` (Sprint 00 a `main`), incluir enlaces a los documentos, riesgos y evidencia. Revisar CI, comentarios y diff final. Solicitar aprobación humana explícita y autorización de merge; no autoaprobar.
 3. Registrar aprobación con identidad, fecha, referencia y commit revisado. Si se modifica código tras aprobación, invalidar aprobación y revalidar. La actualización exclusivamente administrativa del acta debe ser trazable y respetar las políticas del PR.
 4. Fusionar solo con aprobación y checks requeridos. Si no hay permisos, dejar PR listo y pedir al usuario ejecutar el merge. No afirmar que se fusionó hasta verificarlo.
-5. Actualizar main local (`git switch main`, `git pull --ff-only origin main`), confirmar merge por Git/PR, registrar SHA y referencia de PR, actualizar acta y roadmap mediante el mecanismo autorizado (PR documental si main está protegido). Eliminar rama propia local/remota solo después de verificar merge y si corresponde; no usar `-D` por defecto.
-6. Marcar `CLOSED` únicamente tras verificar fusión y registro final; siguiente sprint desde main actualizado. No comenzar otro sprint sin autorización.
+5. Actualizar la rama destino local, confirmar merge por Git/PR y registrar SHA y referencia de PR. Actualizar acta y roadmap mediante el mecanismo autorizado. Eliminar rama propia solo tras verificar merge y si corresponde; no usar `-D` por defecto.
+6. Marcar `CLOSED` tras verificar fusión y registro final. Después de Sprint 00 crear `develop` desde `main`; los siguientes sprints parten de `develop` actualizado. No comenzar otro sprint sin autorización.
 
 ## Estados y recuperación
 `PLANNED → ANALYSIS → PLAN_REVIEW → APPROVED → IN_PROGRESS → VERIFYING → READY_FOR_REVIEW → MERGE_APPROVED → CLOSED`. `BLOCKED` se puede usar en cualquier fase con causa y acción siguiente. Al retomar, comprobar evidencia y estado real. Si una fase falla, retornar a la fase pertinente sin perder el historial.

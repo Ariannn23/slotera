@@ -12,7 +12,7 @@ Slotera es un SaaS multiempresa de reservas y un proyecto de aprendizaje de Java
 *   Mantener monolito modular, arquitectura hexagonal pragmática en reservas y disponibilidad, aislamiento por organización y consistencia de ocupaciones. No introducir microservicios ni sobreingeniería.
 *   Priorizar el aprendizaje: explicar conceptos Java/Spring, comandos, alternativas y decisiones; ofrecer un ejercicio acotado al desarrollador, revisar su solución y explicar errores. No resolver automáticamente el ejercicio reservado al usuario salvo petición.
 *   Crear pruebas y documentación junto al código. Nunca afirmar que una verificación pasó si no se ejecutó. Registrar bloqueos, resultados reales y riesgos.
-*   Usar `main` como base de cada sprint, rama `sprint/XX-nombre`, commits atómicos en español y PR hacia `main`. No fusionar sin aprobación explícita, CI y Definition of Done satisfechos.
+*   Tras cerrar Sprint 00, crear `develop` desde `main`. Usar `develop` actualizado como base de cada rama `sprint/XX-nombre`, commits atómicos en español y PR hacia `develop`. Sprint 00 continúa hacia `main` como excepción. No fusionar sin aprobación explícita, CI y Definition of Done satisfechos.
 *   Crear un README por módulo nuevo de API o frontend; actualizarlo cuando cambie su contrato o comportamiento.
 *   En cada turno de trabajo comunicar fase, cambios, pruebas y próximo paso. Al retomar, reconstruir estado a partir de Git y documentos; no asumir que un sprint está aprobado por existir un archivo.
 

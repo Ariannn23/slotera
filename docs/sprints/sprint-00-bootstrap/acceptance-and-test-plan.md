@@ -22,3 +22,11 @@ Verificar configuración Compose, conexión fallida con PostgreSQL y mensaje de 
 | Pendiente | Pendiente | Pendiente | PENDING | — |
 
 Defectos, correcciones y revalidaciones: pendientes.
+
+## Evidencia parcial del 27-11-2026
+
+- `podman compose config --quiet` terminó con código 0 y `podman compose ps` mostró PostgreSQL 17 saludable en 55432.
+- `mvnw.cmd clean verify` falló inicialmente por la tabla de eventos de Modulith ausente. Tras retirar la integración JPA de eventos, terminó con código 0 y una prueba de contexto aprobada. Flyway aplicó V1 y validó el historial en el segundo arranque.
+- `GET http://localhost:18080/actuator/health` respondió `UP`.
+- En `apps/web`, `pnpm lint`, `pnpm build`, `pnpm typecheck` y `pnpm test` terminaron con código 0. Vitest ejecutó una prueba.
+- Falta verificar copia limpia, fallo de conexión, interfaz en navegador, CI del commit candidato y ejercicio del desarrollador. Estos casos permanecen PENDING.

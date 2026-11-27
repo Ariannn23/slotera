@@ -1,17 +1,17 @@
 # Acta de aprobación — Sprint 00
 
-Estado: VERIFYING · Rama: sprint/00-bootstrap · SHA verificado: 6d96dc6 · PR: #1
+Estado: VERIFYING · Rama: sprint/00-bootstrap · PR: #1
 
 ## Resultado y evidencias
 
-API Spring Boot y web React iniciales, PostgreSQL con Compose, Flyway, health y CI implementados. La matriz registra verificaciones locales y de copia limpia. La CI del SHA 6d96dc6 pasó para API y web. El desarrollador compartió health y Compose y revisamos el puerto y la persistencia del volumen. La web sigue mostrando la plantilla provisional de Vite.
+API Spring Boot y web React iniciales, PostgreSQL con Compose, Flyway, health y CI implementados. La matriz registra verificaciones locales y de copia limpia. La CI del SHA b3ba1a8 pasó para API y web. El usuario aceptó el 27-11-2026 la revisión acompañada de health, puertos y volumen como cumplimiento del ejercicio. La web sigue mostrando la plantilla provisional de Vite.
 
 ## Definition of Done
 
-- [ ] Criterios aplicables, pruebas y comprobaciones manuales aprobados. CA-06 queda pendiente de aceptar la revisión acompañada.
+- [x] Criterios aplicables, pruebas y comprobaciones manuales aprobados.
 - [x] Migraciones y documentación verificadas según alcance.
 - [ ] Diff revisado y CI verde para el commit candidato final.
-- [ ] Riesgos residuales y aprendizaje registrados.
+- [x] Riesgos residuales y aprendizaje registrados.
 
 ## Aprobación humana y cierre
 

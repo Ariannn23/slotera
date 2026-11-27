@@ -9,7 +9,7 @@ Entorno y commit candidato: pendientes. Estados iniciales PENDING.
 | CA-03 | HU-01 | Una copia limpia | Se instalan dependencias y arranca web | La aplicación inicial carga y sus pasos están documentados. | PASS |
 | CA-04 | HU-02 | El proyecto configurado | Se ejecutan verificaciones API y web | Compilación, pruebas, lint, typecheck y build aplicables terminan correctamente. | PASS |
 | CA-05 | HU-02 | Un PR con el commit candidato | Se ejecuta GitHub Actions | Las verificaciones configuradas terminan en verde y quedan registradas. | PENDING |
-| CA-06 | HU-03 | Instrucciones de arranque | El desarrollador realiza el ejercicio | Explica servicio, puerto y volumen y verifica health con acompañamiento. | PENDING |
+| CA-06 | HU-03 | Instrucciones de arranque | El desarrollador realiza el ejercicio | Explica servicio, puerto y volumen y verifica health con acompañamiento. | PASS |
 
 ## Casos adicionales
 
@@ -46,4 +46,4 @@ Defectos, correcciones y revalidaciones: pendientes.
 - La CI del commit candidato final debe comprobarse después de incorporar esta evidencia.
 - Se inició Compose desde la copia con un proyecto y volumen nuevos. Para evitar el puerto ya ocupado se cambió en una copia temporal de Compose el puerto anfitrión a 55433 y se ajustó `DATABASE_URL`. Flyway aplicó V1 y health respondió `UP` en el puerto de prueba 18083.
 - El desarrollador compartió una respuesta health con estado `UP` y el fragmento de Compose del servicio PostgreSQL. Se revisaron conjuntamente el mapeo de puertos y la función del volumen, aclarando su consulta sobre persistencia.
-- Se propone aceptar la revisión acompañada como cumplimiento de CA-06. El criterio aprobado pide una explicación del desarrollador, que no se ha registrado. La propuesta requiere aprobación humana.
+- El usuario aceptó expresamente el 27-11-2026 la revisión acompañada como cumplimiento de CA-06. El criterio original pedía una explicación del desarrollador; se acepta la revisión conjunta realizada en la conversación.

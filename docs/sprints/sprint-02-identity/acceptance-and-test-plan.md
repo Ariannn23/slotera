@@ -1,6 +1,6 @@
 # Aceptación y plan de pruebas — Sprint 02
 
-Entorno, commit candidato y evidencia: pendientes. Las siguientes políticas y respuestas son propuestas para aprobación.
+El plan y las decisiones fueron aprobados por el desarrollador. Los estados reflejan la evidencia completa exigida por cada criterio; los casos aún no demostrados se mantienen pendientes.
 
 | ID | HU | Dado | Cuando | Entonces | Estado |
 |---|---|---|---|---|---|
@@ -41,5 +41,7 @@ En local, levantar servicios y realizar registro, verificación y recuperación 
 - La suite local pasó con 17 pruebas API, ninguna omitida; web pasó typecheck, lint, una prueba Vitest y build. La prueba E2E pasó por separado. Se repetirá para el commit candidato.
 - El ejercicio del desarrollador identificó correctamente emisor, sujeto, audiencia y vencimiento. Se explicó la representación de `exp` y la validación de firma.
 - Las pruebas con JWKS sintético verifican rotación de clave y rechazo cuando una nueva clave no se puede obtener. Las pruebas locales se realizaron en la copia aislada, con la API en 18089 y PostgreSQL de prueba en 55435. Pendientes: CI del PR y verificación final para el commit candidato.
+- La ejecución de CI [46084218861](https://github.com/Ariannn23/slotera/actions/runs/46084218861) pasó API, web y el flujo real de identidad para `a8d77d9`; los cambios posteriores requieren una nueva ejecución de CI.
+- Playwright también verificó navegación inicial con teclado y el bloqueo temporal de una cuenta sintética tras intentos fallidos en Keycloak. Ambas pruebas E2E pasaron localmente el 27-11-2026.
 
 Revisar reportes efectivos, cantidades y pruebas omitidas. Si no hay navegador, contenedor, correo, CI o acceso al proveedor, marcar BLOCKED y conservar las demás evidencias. No se declaran probadas membresías ni aislamiento multiempresa hasta Sprint 03. Estados: PENDING, PASS, FAIL, BLOCKED y NOT_APPLICABLE con motivo.

@@ -53,7 +53,14 @@ test('registro, verificación, acceso, cierre y recuperación con Keycloak', asy
 
   await page.clock.install()
   await page.goto('/')
-  await page.getByRole('button', { name: 'Crear cuenta' }).click()
+  await expect(page.getByRole('button', { name: 'Crear cuenta' })).toBeVisible()
+  await page.keyboard.press('Tab')
+  await expect(page.getByRole('link', { name: 'Slotera, inicio' })).toBeFocused()
+  await page.keyboard.press('Tab')
+  await expect(page.getByRole('button', { name: 'Iniciar sesión' })).toBeFocused()
+  await page.keyboard.press('Tab')
+  await expect(page.getByRole('button', { name: 'Crear cuenta' })).toBeFocused()
+  await page.keyboard.press('Enter')
   await expect(page.getByRole('heading', { name: 'Register' })).toBeVisible()
   expect(pkceObserved).toBe(true)
   await page.locator('#username').fill(username)
@@ -123,4 +130,35 @@ test('registro, verificación, acceso, cierre y recuperación con Keycloak', asy
   await invalidLinkPage.goto('http://localhost:18088/realms/slotera/login-actions/action-token?key=invalid')
   await expect(invalidLinkPage.locator('#kc-error-message')).toContainText('error')
   await invalidLinkPage.close()
+})
+
+test('Keycloak bloquea temporalmente una cuenta tras intentos fallidos', async ({ page, request }) => {
+  test.setTimeout(180_000)
+  const provider = 'http://localhost:18088'
+  const admin = await request.post(`${provider}/realms/master/protocol/openid-connect/token`, {
+    form: { grant_type: 'password', client_id: 'admin-cli', username: process.env.KEYCLOAK_ADMIN_USERNAME ?? '', password: process.env.KEYCLOAK_ADMIN_PASSWORD ?? '' },
+  })
+  expect(admin.ok()).toBe(true)
+  const token = (await admin.json()).access_token as string
+  const headers = { Authorization: `Bearer ${token}` }
+  const username = `lockout${Date.now()}${randomBytes(4).toString('hex')}`
+  const created = await request.post(`${provider}/admin/realms/slotera/users`, {
+    headers,
+    data: { username, enabled: true, emailVerified: true, credentials: [{ type: 'password', value: `Aa1!${randomBytes(20).toString('hex')}`, temporary: false }] },
+  })
+  expect(created.status()).toBe(201)
+  const users = await (await request.get(`${provider}/admin/realms/slotera/users`, { headers, params: { username, exact: 'true' } })).json()
+  const userId = users[0].id as string
+  await page.goto('/')
+  await page.getByRole('button', { name: 'Iniciar sesión' }).click()
+  let disabled = false
+  for (let attempt = 0; attempt < 35 && !disabled; attempt++) {
+    await page.getByLabel('Username or email').fill(username)
+    await page.getByLabel('Password', { exact: true }).fill('Incorrect1!')
+    await page.getByRole('button', { name: 'Sign In' }).click()
+    const status = await request.get(`${provider}/admin/realms/slotera/attack-detection/brute-force/users/${userId}`, { headers })
+    expect(status.ok()).toBe(true)
+    disabled = Boolean((await status.json()).disabled)
+  }
+  expect(disabled).toBe(true)
 })

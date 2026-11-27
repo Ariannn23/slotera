@@ -21,7 +21,7 @@
 
 ## Seguimiento
 - [x] Sprint 00: Inicialización
-- [ ] Sprint 01: Fundamentos backend
+- [x] Sprint 01: Fundamentos backend
 - [ ] Sprint 02: Identidad
 - [ ] Sprint 03: Multiempresa
 - [ ] Sprint 04: Sedes y recursos

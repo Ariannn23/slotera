@@ -30,3 +30,10 @@ Defectos, correcciones y revalidaciones: pendientes.
 - `GET http://localhost:18080/actuator/health` respondió `UP`.
 - En `apps/web`, `pnpm lint`, `pnpm build`, `pnpm typecheck` y `pnpm test` terminaron con código 0. Vitest ejecutó una prueba.
 - Falta verificar copia limpia, fallo de conexión, interfaz en navegador, CI del commit candidato y ejercicio del desarrollador. Estos casos permanecen PENDING.
+
+## CI y diagnóstico adicional
+
+- El PR 1 para `main` ejecutó CI en el commit `5ddc1f7`. Web pasó; API falló por permiso de ejecución de `mvnw` en Linux. El commit `7aceec1` corrigió el modo del archivo.
+- La ejecución 46060512990 en el commit `7aceec1` terminó con API y web en PASS. La CI se debe volver a comprobar para cualquier commit posterior.
+- El servidor Vite respondió HTTP 200 en el puerto 15173. La inspección visual y el ejercicio siguen pendientes.
+- La API con `DATABASE_URL` apuntando al puerto local 1 terminó con código 1 al fallar la conexión, como se esperaba para una base inaccesible.

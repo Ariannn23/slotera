@@ -1,6 +1,6 @@
 # ADR-004 — Identidad externa
 
-Estado: propuesto, pendiente de aprobación.
+Estado: aprobado por el usuario el 27-11-2026 como parte del plan del Sprint 02.
 
 ## Decisión
 Keycloak OIDC + Spring Security resource server.

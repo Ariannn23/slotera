@@ -8,7 +8,7 @@ Entorno y commit candidato: pendientes. Estados iniciales PENDING.
 | CA-02 | HU-01 | Una base ya migrada | Se inicia de nuevo la API | Flyway valida el historial y el arranque concluye. | PASS |
 | CA-03 | HU-01 | Una copia limpia | Se instalan dependencias y arranca web | La aplicación inicial carga y sus pasos están documentados. | PASS |
 | CA-04 | HU-02 | El proyecto configurado | Se ejecutan verificaciones API y web | Compilación, pruebas, lint, typecheck y build aplicables terminan correctamente. | PASS |
-| CA-05 | HU-02 | Un PR con el commit candidato | Se ejecuta GitHub Actions | Las verificaciones configuradas terminan en verde y quedan registradas. | PENDING |
+| CA-05 | HU-02 | Un PR con el commit candidato | Se ejecuta GitHub Actions | Las verificaciones configuradas terminan en verde y quedan registradas. | PASS para 7197830; pendiente CI del commit administrativo |
 | CA-06 | HU-03 | Instrucciones de arranque | El desarrollador realiza el ejercicio | Explica servicio, puerto y volumen y verifica health con acompañamiento. | PASS |
 
 ## Casos adicionales
@@ -47,3 +47,4 @@ Defectos, correcciones y revalidaciones: pendientes.
 - Se inició Compose desde la copia con un proyecto y volumen nuevos. Para evitar el puerto ya ocupado se cambió en una copia temporal de Compose el puerto anfitrión a 55433 y se ajustó `DATABASE_URL`. Flyway aplicó V1 y health respondió `UP` en el puerto de prueba 18083.
 - El desarrollador compartió una respuesta health con estado `UP` y el fragmento de Compose del servicio PostgreSQL. Se revisaron conjuntamente el mapeo de puertos y la función del volumen, aclarando su consulta sobre persistencia.
 - El usuario aceptó expresamente el 27-11-2026 la revisión acompañada como cumplimiento de CA-06. El criterio original pedía una explicación del desarrollador; se acepta la revisión conjunta realizada en la conversación.
+- CI de GitHub Actions, ejecución 46071557647, pasó para API y web en el commit revisado `7197830`.

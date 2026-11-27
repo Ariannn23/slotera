@@ -1,6 +1,6 @@
 # Acta de aprobación — Sprint 00
 
-Estado: VERIFYING · Rama: sprint/00-bootstrap · PR: #1
+Estado: MERGE_APPROVED · Rama: sprint/00-bootstrap · PR: #1
 
 ## Resultado y evidencias
 
@@ -10,11 +10,11 @@ API Spring Boot y web React iniciales, PostgreSQL con Compose, Flyway, health y 
 
 - [x] Criterios aplicables, pruebas y comprobaciones manuales aprobados.
 - [x] Migraciones y documentación verificadas según alcance.
-- [ ] Diff revisado y CI verde para el commit candidato final.
+- [x] Diff revisado y CI verde para el commit revisado 7197830. El commit administrativo que registra la aprobación debe superar CI antes del merge.
 - [x] Riesgos residuales y aprendizaje registrados.
 
 ## Aprobación humana y cierre
 
-Aprobación del resultado: PENDING · Aprobador y fecha: pendientes · SHA revisado: pendiente.
+Aprobación del resultado: APPROVED · Aprobador: usuario · Fecha: 2026-11-27 · SHA revisado: 7197830d65824f39573544d76abf5131b07a96c3 · Referencia: conversación, «Apruebo el sprint 00 y autorizo su fusion».
 
-Autorización de merge: PENDING · Merge verificado: NO · SHA final y PR: pendientes · Actualización de main y roadmap: pendientes.
+Autorización de merge: APPROVED · Merge verificado: NO · SHA final: pendiente · Actualización de main y roadmap: pendientes.
